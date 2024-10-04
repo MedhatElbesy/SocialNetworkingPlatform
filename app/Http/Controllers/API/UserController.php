@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserProfileRequest;
+use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
+use App\Models\Post;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -71,5 +73,23 @@ class UserController extends Controller
         $users = User::where('name', 'LIKE', "%$query%")->orWhere('email', 'LIKE', "%$query%")->get();
 
         return response()->json($users, 200);
+    }
+
+    public function getTimeline()
+    {
+        try {
+            $user = auth()->user();
+
+            $userPosts = Post::where('user_id', $user->id);
+
+            $friendIds = $user->friendships()->wherePivot('status', 'accepted')->pluck('friend_id')->toArray();
+            $friendPosts = Post::whereIn('user_id', $friendIds);
+
+            $timelinePosts = $userPosts->union($friendPosts)->orderBy('created_at', 'desc')->paginate(10);
+
+            return ApiResponse::sendResponse(200, 'Timeline fetched successfully', PostResource::collection($timelinePosts));
+        } catch (Exception $e) {
+            return ApiResponse::sendResponse(500, $e->getMessage());
+        }
     }
 }

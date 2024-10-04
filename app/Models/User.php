@@ -66,44 +66,5 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    public function sentFriendRequests()
-    {
-        return $this->hasMany(Friendship::class, 'user_id');
-    }
-
-    public function receivedFriendRequests()
-    {
-        return $this->hasMany(Friendship::class, 'friend_id');
-    }
-
-    public function friends()
-    {
-        return $this->belongsToMany(User::class, 'friendships', 'user_id', 'friend_id')
-            ->wherePivot('status', 'accepted')
-            ->withTimestamps();
-    }
-
-    public function sendFriendRequest($friendId)
-    {
-        return $this->sentFriendRequests()->create([
-            'friend_id' => $friendId,
-            'status' => 'pending',
-        ]);
-    }
-
-    public function acceptFriendRequest($userId)
-    {
-        return $this->receivedFriendRequests()
-            ->where('user_id', $userId)
-            ->update(['status' => 'accepted']);
-    }
-
-    public function rejectFriendRequest($userId)
-    {
-        return $this->receivedFriendRequests()
-            ->where('user_id', $userId)
-            ->update(['status' => 'rejected']);
-    }
-
 
 }

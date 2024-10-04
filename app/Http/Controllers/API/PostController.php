@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Resources\LikeResource;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Traits\UploadImageTrait;
@@ -89,6 +90,19 @@ class PostController extends Controller
         }
             $post->delete();
             return ApiResponse::sendResponse(200, 'Post deleted successfully');
+        } catch (Exception $e) {
+            return ApiResponse::sendResponse(500, $e->getMessage());
+        }
+    }
+
+    public function showPostLikes($postId)
+    {
+        try {
+            $post = Post::findOrFail($postId);
+
+            $likes = $post->likes()->with('user')->get();
+
+            return ApiResponse::sendResponse(200, 'Likes retrieved successfully', LikeResource::collection($likes));
         } catch (Exception $e) {
             return ApiResponse::sendResponse(500, $e->getMessage());
         }

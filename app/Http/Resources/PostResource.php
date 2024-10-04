@@ -15,11 +15,13 @@ class PostResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'       => $this->id,
-            'content'  => $this->content,
-            'image'    => $this->image ? url('storage/' . $this->image) : null,
-            'user'     => new UserResource($this->user),
-            'comments' => CommentResource::collection($this->comments),
+            'id'             => $this->id,
+            'content'        => $this->content,
+            'image'          => $this->image ? url('storage/' . $this->image) : null,
+            'user'           => new UserResource($this->user),
+            'comments'       => CommentResource::collection($this->comments),
+            'likes_count'    => $this->likes->count(),
+            'comments_count' => $this->comments->count(),
         ];
     }
 }
