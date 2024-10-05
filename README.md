@@ -35,15 +35,15 @@ This project is a basic social networking platform built with Laravel, allowing 
 - PHP
 - MySQL
 - Blade (Laravel's templating engine)
-- Laravel Passport or Sanctum (for API authentication)
-- Laravel Echo (for real-time notifications)
-- JavaScript / jQuery (for front-end interactivity)
+- Laravel Sanctum (for API authentication)
+- Pusher (for real-time notifications)
+- JavaScript  (for front-end interactivity)
 
 ## Installation
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/social-networking-platform.git
+   https://github.com/MedhatElbesy/SocialNetworkingPlatform.git
 2. **Navigate to the project directory**:
     ```bash
     cd social-networking-platform
