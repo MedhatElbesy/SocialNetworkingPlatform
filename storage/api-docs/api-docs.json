@@ -19,6 +19,659 @@
         }
     ],
     "paths": {
+        "/posts/{postId}/comments": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Get all comments by post ID",
+                "description": "Retrieve all comments for a specific post.",
+                "operationId": "b2d311da8e8c8fc060d0d34501ebf685",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "ID of the post",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comments retrieved successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "content": {
+                                                "type": "string",
+                                                "example": "This is a comment."
+                                            },
+                                            "user_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "post_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-10-05 12:00:00"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-10-05 12:00:00"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Post not found"
+                    },
+                    "500": {
+                        "description": "Error retrieving comments"
+                    }
+                }
+            }
+        },
+        "/comments": {
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Create a new comment",
+                "description": "Create a new comment on a post.",
+                "operationId": "5d6cbfc7a728b6b64e95b489029f5851",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "content": {
+                                        "type": "string",
+                                        "example": "This is a comment."
+                                    },
+                                    "post_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Comment created successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "content": {
+                                            "type": "string",
+                                            "example": "This is a comment."
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "post_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-10-05 12:00:00"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-10-05 12:00:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error creating comment"
+                    }
+                }
+            }
+        },
+        "/comments/{id}": {
+            "put": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Update a comment",
+                "description": "Update a specific comment by ID.",
+                "operationId": "7930eb30734b45505560534e48a2a3c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the comment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Updated comment text."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comment updated successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "content": {
+                                            "type": "string",
+                                            "example": "Updated comment text."
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "post_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-10-05 12:00:00"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-10-05 12:00:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Comment not found"
+                    },
+                    "500": {
+                        "description": "Error updating comment"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Delete a comment",
+                "description": "Delete a specific comment by ID.",
+                "operationId": "a8a0f21605f4eb49b0d7149b6754a40f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the comment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Comment deleted successfully."
+                    },
+                    "404": {
+                        "description": "Comment not found"
+                    },
+                    "500": {
+                        "description": "Error deleting comment"
+                    }
+                }
+            }
+        },
+        "/friend-request/send/{friendId}": {
+            "post": {
+                "tags": [
+                    "Friendships"
+                ],
+                "summary": "Send a friend request",
+                "description": "Send a friend request to another user.",
+                "operationId": "eb0e8815131bd8c664c76ee53a98a868",
+                "parameters": [
+                    {
+                        "name": "friendId",
+                        "in": "path",
+                        "description": "ID of the user to send a friend request to",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Friend request sent.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Friend request sent"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/FriendshipResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error sending friend request.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error message here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/friend-request/accept/{userId}": {
+            "post": {
+                "tags": [
+                    "Friendships"
+                ],
+                "summary": "Accept a friend request",
+                "description": "Accept a pending friend request from another user.",
+                "operationId": "dfa67cb082207c14b7b76a92a095cf8c",
+                "parameters": [
+                    {
+                        "name": "friendId",
+                        "in": "path",
+                        "description": "ID of the user whose friend request is accepted",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Friend request accepted.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Friend request accepted"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/FriendshipResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error accepting friend request.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error message here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/friend-request/reject/{userId}": {
+            "post": {
+                "tags": [
+                    "Friendships"
+                ],
+                "summary": "Reject a friend request",
+                "description": "Reject a pending friend request from another user.",
+                "operationId": "28845bd6d1d63262022dd8d7affe5a22",
+                "parameters": [
+                    {
+                        "name": "friendId",
+                        "in": "path",
+                        "description": "ID of the user whose friend request is rejected",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Friend request rejected.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Friend request rejected"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/FriendshipResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error rejecting friend request.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error message here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/friends": {
+            "get": {
+                "tags": [
+                    "Friendships"
+                ],
+                "summary": "List all friends",
+                "description": "Retrieve a list of all the friends of the authenticated user.",
+                "operationId": "d56e0d858e672778539c219d050a6b11",
+                "responses": {
+                    "200": {
+                        "description": "Friends list retrieved.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Friends list retrieved"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/UserResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error retrieving friends list.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error message here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/friends/pending": {
+            "get": {
+                "tags": [
+                    "Friendships"
+                ],
+                "summary": "List all pending friend requests",
+                "description": "Retrieve a list of all pending friend requests for the authenticated user.",
+                "operationId": "467930aaf8bd4386f51df6e167b9099e",
+                "responses": {
+                    "200": {
+                        "description": "Pending friend requests retrieved.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Pending friend requests retrieved"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/FriendshipResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error retrieving pending requests.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error message here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/posts/{postId}/likes": {
+            "post": {
+                "tags": [
+                    "Likes"
+                ],
+                "summary": "Toggle like for a post",
+                "description": "Toggle a like or unlike for a post by the authenticated user. Returns a message indicating whether the post was liked or unliked.",
+                "operationId": "0cf5d03369c72df1c23b42d5668a05f7",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "ID of the post to like/unlike",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Post liked successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 201
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Post liked successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Post unliked successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Post unliked successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error message here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/post": {
             "get": {
                 "tags": [
@@ -537,6 +1190,45 @@
     },
     "components": {
         "schemas": {
+            "FriendshipResource": {
+                "title": "Friendship Resource",
+                "description": "Represents the friendship resource",
+                "properties": {
+                    "id": {
+                        "description": "Friendship ID",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "description": "The ID of the user who sent the request",
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "friend_id": {
+                        "description": "The ID of the user who received the request",
+                        "type": "integer",
+                        "example": 15
+                    },
+                    "status": {
+                        "description": "The status of the friendship request",
+                        "type": "string",
+                        "example": "pending"
+                    },
+                    "created_at": {
+                        "description": "Timestamp when the friendship request was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-10-05T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "description": "Timestamp when the friendship request was last updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-10-05T12:45:56Z"
+                    }
+                },
+                "type": "object"
+            },
             "UserResource": {
                 "description": "User resource response",
                 "properties": {
@@ -604,6 +1296,18 @@
         }
     },
     "tags": [
+        {
+            "name": "Comments",
+            "description": "Comments"
+        },
+        {
+            "name": "Friendships",
+            "description": "Friendships"
+        },
+        {
+            "name": "Likes",
+            "description": "Likes"
+        },
         {
             "name": "Posts",
             "description": "Posts"

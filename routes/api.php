@@ -41,7 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::controller(FriendshipController::class)->group(function(){
         Route::get('friends','listFriends');
-        Route::get('friend-requests','listPendingRequests');
+        Route::get('friends/pending','listPendingRequests');
         Route::post('friend-request/send/{friendId}','sendRequest');
         Route::post('friend-request/accept/{userId}','acceptRequest');
         Route::post('friend-request/reject/{userId}','rejectRequest');
