@@ -10,7 +10,7 @@
 
 ## Introduction
 
-This project is a basic social networking platform built with Laravel, allowing users to create profiles, connect with others, create posts, comment on posts, and like posts. The application utilizes Laravel's powerful features for authentication, database management, and API development, providing a user-friendly interface for interaction.
+This project is a basic social networking platform built with Laravel, allowing users to create profiles, connect with others, create posts, comment on posts, and like posts. The application utilizes Laravel's powerful features for authentication, database management, and API development, providing a user-friendly interface for interaction Also use repository pattern for bettern for better code organization.
 
 ## Features
 
