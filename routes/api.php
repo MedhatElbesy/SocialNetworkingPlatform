@@ -4,6 +4,7 @@
 // use App\Http\Controllers\Auth\LoginController;
 // use App\Http\Controllers\Auth\RegisterController;
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\FriendshipController;
 use App\Http\Controllers\API\LikeController;
@@ -27,8 +28,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('/register', [RegisterController::class, 'register']);
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -57,6 +58,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('post', PostController::class);
     Route::get('posts/{postId}/likes', [PostController::class, 'showPostLikes']);
-    Route::post('/logout',[LogoutController::class,'logout']);
+    Route::post('/logout',[AuthController::class,'logout']);
     Route::post('posts/{postId}/likes', [LikeController::class, 'toggle']);
 });

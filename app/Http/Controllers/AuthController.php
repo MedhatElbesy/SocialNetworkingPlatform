@@ -2,29 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
+
 class AuthController extends Controller
 {
+    protected $authService;
+
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
+
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->route('feeds.index')->with('success', 'Logged in successfully!');
+        if (!$this->authService->login($request->only('email', 'password'))) {
+            return back()->withErrors(['email' => 'Invalid credentials']);
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        return redirect()->route('feeds.index')->with('success', 'Logged in successfully!');
     }
 
     public function showRegistrationForm()
@@ -32,26 +39,16 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|confirmed|min:8',
-        ]);
-
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = $this->authService->register($request->only('name', 'email', 'password'));
 
         return redirect()->route('login')->with('success', 'Registration successful! Please log in.');
     }
 
     public function logout()
     {
-        Auth::logout();
+        $this->authService->logout();
         return redirect()->route('login')->with('success', 'Logged out successfully!');
     }
 }
