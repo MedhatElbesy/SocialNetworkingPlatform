@@ -46,7 +46,7 @@
         @endif
     </div>
 
-    <!-- Add a comment form -->
+
     <div class="add-comment-form">
         <h5>Add a Comment:</h5>
         <form action="{{ route('comments.store', $post->id) }}" method="POST">

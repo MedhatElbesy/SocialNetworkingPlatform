@@ -4,27 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use App\Models\Post;
+use App\Repositories\like\LikeRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
+
+    protected $likeRepository;
+
+    public function __construct(LikeRepositoryInterface $likeRepository)
+    {
+        $this->likeRepository = $likeRepository;
+    }
     public function toggle($postId)
     {
-        $post = Post::findOrFail($postId);
-        $userId = Auth::id();
+            $userId = Auth::id();
+            $result = $this->likeRepository->toggleLike($postId, $userId);
 
-        $like = Like::where('post_id', $postId)->where('user_id', $userId)->first();
-
-        if ($like) {
-            $like->delete();
-            return redirect()->back()->with('success', 'Post unliked successfully!');
+        if ($result == 'liked') {
+            return redirect()->back()->with('success', 'Post liked  successfully!');
         } else {
-            Like::create([
-                'post_id' => $postId,
-                'user_id' => $userId,
-            ]);
-            return redirect()->back()->with('success', 'Post liked successfully!');
+            return redirect()->back()->with('success', 'Post unliked successfully!');
         }
     }
 }

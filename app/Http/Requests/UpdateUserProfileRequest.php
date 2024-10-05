@@ -22,10 +22,11 @@ class UpdateUserProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'            => 'required|string|max:255',
-            'email'           => 'required|email|unique:users,email,' . $this->user()->id,
-            'image'           => 'nullable|image|max:2048',
-            'bio'             => 'nullable|string',
+            // 'id'  => 'required',
+            'name'            => 'sometimes|required|string|max:255',
+            'email'           => 'sometimes|required|email|unique:users,email,' . $this->user()->id,
+            'image'           => 'sometimes|nullable|image|max:2048',
+            'bio'             => 'sometimes|nullable|string',
         ];
     }
 }

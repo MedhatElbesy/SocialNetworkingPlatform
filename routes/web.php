@@ -34,10 +34,11 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('users/{id}', [UserController::class, 'show'])->name('profiles.show');
-
-Route::get('/', [FeedController::class, 'index'])->name('feeds.index');
-
 Route::resource('posts', PostController::class)->only(['create', 'store', 'show']);
+
+
+
+Route::get('/', [FeedController::class, 'index'])->name('feeds.index')->middleware('auth');
 
 Route::post('posts/{postId}/comments', [CommentController::class, 'store'])->name('comments.store');
 
