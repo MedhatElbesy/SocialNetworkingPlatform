@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\CommentAdded;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
@@ -43,6 +44,7 @@ class CommentController extends Controller
             $data['user_id'] = auth()->id();
 
             $comment = $this->commentRepository->createComment($data);
+            broadcast(new CommentAdded($comment));
 
             return ApiResponse::sendResponse(201, 'Comment created successfully.', new CommentResource($comment));
         } catch (Exception $e) {

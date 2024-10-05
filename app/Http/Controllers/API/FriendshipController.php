@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\FriendRequestSent;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FriendshipResource;
@@ -27,6 +28,7 @@ class FriendshipController extends Controller
             $user = auth()->user();
 
             $friendship = $this->friendshipRepository->sendFriendRequest($user, $friendId);
+            broadcast(new FriendRequestSent(auth()->user()));
 
             return ApiResponse::sendResponse(201, 'Friend request sent', new FriendshipResource($friendship));
         } catch (Exception $e) {

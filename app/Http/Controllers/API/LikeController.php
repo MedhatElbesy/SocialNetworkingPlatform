@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\LikeToggled;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Like;
@@ -26,6 +27,7 @@ class LikeController extends Controller
             $result = $this->likeRepository->toggleLike($postId, $userId);
 
             if ($result == 'liked') {
+                broadcast(new LikeToggled($postId));
                 return ApiResponse::sendResponse(201, 'Post liked successfully');
             } else {
                 return ApiResponse::sendResponse(200, 'Post unliked successfully');
