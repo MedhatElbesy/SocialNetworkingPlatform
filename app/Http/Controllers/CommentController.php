@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreComment;
 use App\Http\Requests\StoreCommentRequest;
 use App\Models\Comment;
 
@@ -19,14 +20,15 @@ class CommentController extends Controller
     {
         $this->commentRepository = $commentRepository;
     }
-    public function store(StoreCommentRequest $request, $postId)
+    public function store(StoreComment $request, $postId)
     {
-        dd("hhhhhhhhh");
             $data = $request->validated();
             $data['user_id'] = auth()->id();
+            $data['post_id'] = $postId;
 
             $comment = $this->commentRepository->createComment($data);
         return redirect()->route('posts.show', $postId)->with('success', 'Comment added successfully');
     }
+
 
 }

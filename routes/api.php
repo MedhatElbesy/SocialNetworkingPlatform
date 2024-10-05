@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::as('api.')->middleware('auth:sanctum')->group(function () {
 
     Route::controller(UserController::class)->group(function(){
         Route::get('users','index');
@@ -56,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 
-    Route::apiResource('post', PostController::class);
+    Route::apiResource('posts', PostController::class);
     Route::get('posts/{postId}/likes', [PostController::class, 'showPostLikes']);
     Route::post('/logout',[AuthController::class,'logout']);
     Route::post('posts/{postId}/likes', [LikeController::class, 'toggle']);

@@ -100,6 +100,7 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
+
         try {
             $data = $request->validated();
             $data['user_id'] = auth()->id();
