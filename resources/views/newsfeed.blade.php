@@ -4,7 +4,6 @@
     <div class="container">
         <h2>News Feed</h2>
 
-        <!-- Post creation form -->
         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <textarea name="content" class="form-control" placeholder="What's on your mind?" required></textarea>
@@ -14,7 +13,6 @@
             </div>
         </form>
 
-        <!-- Display posts -->
         @foreach ($posts as $post)
             <div class="post mt-4">
                 <h4>{{ $post->user->name }}</h4>
@@ -23,7 +21,6 @@
                     <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="img-fluid">
                 @endif
 
-                <!-- Like and Comment options -->
                 <div class="mt-2">
                     <form action="{{ route('post.like', $post->id) }}" method="POST">
                         @csrf
