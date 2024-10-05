@@ -1,66 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Social Networking Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [API Documentation](#api-documentation)
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Introduction
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This project is a basic social networking platform built with Laravel, allowing users to create profiles, connect with others, create posts, comment on posts, and like posts. The application utilizes Laravel's powerful features for authentication, database management, and API development, providing a user-friendly interface for interaction.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+- **User Authentication**: Users can register, log in, log out, and reset their passwords.
+- **User Profiles**: Each user has a profile that includes their name, email, profile picture, and bio. Users can edit their profiles and view others' profiles.
+- **Connections**: Users can send friend requests, and accept or reject requests. A list of friends is available for each user.
+- **Posts**: Users can create text posts that display the author's information and interactions, such as likes and comments.
+- **Comments & Likes**: Users can comment on posts and like them, with visibility on who liked each post.
+- **Database Structure**: A structured database to handle users, posts, comments, likes, and connections, using migrations and seeders.
+- **Frontend**: Built using Blade templates for a responsive and user-friendly interface.
+- **API Authentication**: API endpoints secured with Laravel Passport or Sanctum, allowing authenticated access.
+- **API Endpoints**: RESTful API design supporting CRUD operations for user profiles, posts, comments, likes, and connections.
+- **Response Formats**: JSON responses with appropriate error handling and HTTP status codes.
+- **API Documentation**: Generated API documentation for easy reference.
+- **Image Uploads**: Users can upload images with their posts.
+- **Real-Time Notifications**: Notifications for friend requests, comments, and likes using Pusher.
+- **User Search**: Functionality for users to search and connect with other users.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Technologies Used
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Laravel
+- PHP
+- MySQL
+- Blade (Laravel's templating engine)
+- Laravel Passport or Sanctum (for API authentication)
+- Laravel Echo (for real-time notifications)
+- JavaScript / jQuery (for front-end interactivity)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/social-networking-platform.git
+2. **Navigate to the project directory**:
+    ```bash
+    cd social-networking-platform
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+3. **Install dependencies**:
+    ```bash
+    composer install
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+4. **Set up your environment**:
+   ```bash
+    cp .env.example .env
 
-## Contributing
+5. **Serve the application**:
+     ```bash
+     php artisan serve
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## API Documentation
+**Access**:API endpoints are documented using Swagger. You can access the documentation at http://localhost:8000/api/documentation
